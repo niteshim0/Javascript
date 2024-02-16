@@ -38,7 +38,43 @@ function bar() {
 
 bar(); // Output: I'm a local variable
 
-console.log(localVar); // Error: localVar is not defined
+// console.log(localVar); // Error: localVar is not defined
 
 
+//Scope Part-2 // Nesting of functions and how the scope changes
+// Nesting functions refers to the practice of defining functions within other functions. This is a fundamental aspect of the language and is often used to create closures, manage scope, and organize code. When you nest functions in JavaScript, the inner function has access to variables and parameters of the outer function due to lexical scoping rules. This concept is often referred to as closures.
+
+function one(){
+  const name = "Nitesh"
+  function two(){
+    const surname = " Kushwaha";
+    const fullName = name + surname;
+    console.log(fullName)
+  }
+  // console.log(surname) //ReferenceError: surname is not defined
+  // as explained above //lexical scoping rules
+  two()
+}
+one()
+
+//Normal function v/s Function Expression
+
+//Normal function
+console.log(addOne(6))
+function addOne(num){
+  return num + 1;
+}
+// - Function declarations are hoisted, meaning they are processed before any code execution.
+// - They are available in the entire scope in which they are declared, regardless of where they appear within that scope.
+// - Can be used before they are declared in the code.
+
+//Function expressions
+// console.log(add(7,8)) //ReferenceError: Cannot access 'add' before initialization
+const add = function(a, b) {
+  return a + b;
+};
+console.log(add(7,8))
+// - Function expressions are not hoisted, meaning they are only available after the line of code where they are defined.
+// - They are treated as variables and must be defined before they are used.
+// - Can be named (named function expression) or anonymous (anonymous function expression).
 
