@@ -45,10 +45,11 @@ spellName()
 
 //Way I -- Explicit Return
 const addTwo = (num1,num2) =>{
+  console.log(this)//refers to global object
   return num1 + num2;
 }
 //Way II -- Implictin Return
 
-const addThree = (num1,num2,num3) => num1 + num2 + num3
+const addThree = (num1,num2,num3) => console.log(this) // refers to global object
 
 const addThre = (num1,num2,num3) => (num1 + num2 + num3) //this format is used heavily in react codes

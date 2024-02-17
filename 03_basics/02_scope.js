@@ -14,7 +14,7 @@ if(true){
 
 // console.log(a); //ReferenceError: a is not defined
 // console.log(b); //ReferenceError: b is not defined
-console.log(c); //doesn't give any problem that's the major problem,that is block scope variable interes with global scope variable , it is the major reason var has been deprecated
+console.log(c); //doesn't give any problem that's the major problem,that is block scope variable interferes with global scope variable , it is the major reason var has been deprecated
 
 //Types of Scope in JS : 1)Global Scope    and 2)Local Scope
 //Global Scope :: Variables and functions declared outside of any function or block have global scope. They can be accessed from anywhere within your code, including inside functions and blocks.
