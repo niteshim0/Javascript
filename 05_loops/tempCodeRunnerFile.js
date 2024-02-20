@@ -1,1 +1,3 @@
-console.log("5 Detected");
+coding.forEach( (item, index, arr)=> {
+    console.log(item, index, arr);
+} )
