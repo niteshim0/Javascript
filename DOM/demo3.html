@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit and Remove Elements in DOM</title>
+</head>
+<style>
+  .bg-black{
+    background-color: black;
+    color: white;
+  }
+</style>
+<body class="bg-black">
+  <ul class="laguage">
+    <li>Javascript</li>
+  </ul>
+</body>
+<script>
+  function addNewLang(lang){
+    const li = document.createElement('li');
+    li.textContent = lang;
+    document.querySelector('.laguage').appendChild(li);
+  }
+  addNewLang('Python');
+  addNewLang('Java');
+  addNewLang('C++');
+  addNewLang('C#');
+  addNewLang('Ruby');
+  addNewLang('Go');
+  addNewLang('Rust');
+  addNewLang('Kotlin');
+
+  //Problem with this approach that everytime we add a new Language the whole DOM tree needs to be traversed to find the last of the parent element and then add the new li element to it. This is not a good approach as it is not optimized and will slow down the web page.
+  // Here list element is less so fine what if there are 1000s of list elements then it will be a problem.
+
+  //Optimized way of doing the same thing
+  function addOptiLang(lang){
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(lang));
+    document.querySelector('.laguage').appendChild(li);
+  }
+
+  addOptiLang('TypeScript')
+  addOptiLang('Dart')
+  addOptiLang('Swift')
+  addOptiLang('R')
+  addOptiLang('Perl')
+  addOptiLang('PHP')
+
+
+  //Editing the DOM Elements
+  const lang = document.querySelector("li:nth-child(2)");
+  console.log(lang)
+  const newLi = document.createElement('li');
+  newLi.appendChild(document.createTextNode("Mojo"));
+  lang.replaceWith(newLi);
+
+  //editing the first element of li
+  const firstLang = document.querySelector("li:first-child")
+  firstLang.outerHTML = '<li>TypeScript</li>'
+
+  // removing the last element of li
+  const lastLang = document.querySelector("li:last-child");
+  lastLang.remove();
+
+
+
+</script>
+</html>
