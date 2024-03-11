@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Element in DOM</title>
+  <style>
+    .bg-black {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-black">
+  <div class="parent">
+    <div class="day">Monday</div>
+    <div class="day">Tuesday</div>
+    <div class="day">Wednesday</div>
+    <div class="day">Thursday</div>
+    <div class="day">Friday</div>
+    <div class="day">Saturday</div>
+    <div class="day">Sunday</div>
+  </div>
+  
+</body>
+<script>
+  const parent = document.querySelector('.parent');
+  console.log(parent); // returns the parent div
+  console.log(parent.children); // returns the children of the parent div gives an HTMLCollection containing all the children of the parent div
+  const newElement = document.createElement('div');
+  newElement.textContent = 'New Day';
+  newElement.classList.add('day');
+  newElement.id = Math.round(Math.random() * 10 + 1);
+  parent.appendChild(newElement);
+  console.log(parent);
+  console.log(parent.children);
+  console.log(parent.children[7]) // returns the new element
+
+  //another way to add new element
+  const text = document.createTextNode('Another New Day');
+  const anotherNewElement = document.createElement('div');
+  anotherNewElement.appendChild(text);
+  anotherNewElement.classList.add('day');
+  parent.appendChild(anotherNewElement);
+
+  // there is debate to which method to use but the second method is more preferable as saves one round trip in the DOM Tree as in first first references are searched then the new element is overrided but in second method the new element is directly added to the parent div.
+  // web will never be optimized to very high extent so we have to choose the best method according to the situation.
+
+
+  // looping through parentchildren
+  for (let i = 0; i < parent.children.length; i++) {
+    console.log(parent.children[i].innerText);
+  }
+  console.log(parent.firstElementChild); // returns the first child of the parent div
+  console.log(parent.lastElementChild); // returns the last child of the parent div
+  
+  //Moving from child to parent
+  const dayOne  = document.querySelector('.day');
+  console.log(dayOne.parentElement); // returns the parent of the dayOne div
+  console.log(dayOne.nextElementSibling) // returns the next sibling of the dayOne div
+
+  console.log("NODES :: " , parent.childNodes); // returns all the nodes in the parent div
+  //It returns 16 elements because it includes the text nodes as well and the text nodes are the spaces between the divs and the divs themselves and the text nodes are also considered as nodes.
+  // looping through parent.childNodes
+
+  for (let i = 0; i < parent.childNodes.length; i++) {
+    console.log(parent.childNodes[i]);
+  }
+  // if we see React repo most of the manipulation is done using this parent.childNodes method
+
+</script>
+</html>
