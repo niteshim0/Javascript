@@ -126,3 +126,7 @@ fetch('https://api.github.com/users/hiteshchoudhary')
     console.log(data);
 })
 .catch((error) => console.log(error))
+//internal workings of fetch
+// actually in simple terms fetch can be understood in two parts
+//first one sends the API request though native node / web browser API
+// second one , say a variable named DATA reserved the space in memory , alongwith it contains two array onFulfilled and onRejected and as the response comes back out of these two arrays ,arrays contains the function which gets fired and when fullfilled the DATA variable and this DATA response will fullfilled the value of promise returns to the memory space where promise data is supposed to return
