@@ -179,6 +179,45 @@ console.log(person1.name); // Output: Alice
 console.log(person2.age);  // Output: 25
 ```
 
+## Getter and Setters in JavaScript
+
+In JavaScript, getter and setter methods allow you to define property accessors for an object. They provide a way to control how properties are accessed and modified. Getter methods are used for retrieving the value of a property, while setter methods are used for setting or modifying the value of a property.
+
+Here's how you can define getter and setter methods in JavaScript:
+
+```javascript
+const obj = {
+  // Define a property with a getter and a setter
+  _name: '',
+
+  // Getter method
+  get name() {
+    return this._name;
+  },
+
+  // Setter method
+  set name(newName) {
+    // You can add validation or any other logic here before setting the value
+    this._name = newName;
+  }
+};
+
+// Accessing the property using the getter
+console.log(obj.name); // Output: ''
+
+// Setting the property using the setter
+obj.name = 'John';
+
+// Accessing the property again
+console.log(obj.name); // Output: 'John'
+```
+
+In the above example, name is a property of the obj object. It has a getter method get name() which returns the value of the _name property, and a setter method set name(newName) which sets the value of the _name property. Inside the setter method, you can perform any additional logic such as validation before setting the value.
+
+You might notice that the actual property _name starts with an underscore _. This is a common convention in JavaScript to denote that a property is meant to be private, i.e., it's not intended to be accessed directly from outside the object.
+
+Getter and setter methods provide encapsulation and allow you to control access to object properties, ensuring data integrity and security in your JavaScript code.
+
 
 
 
