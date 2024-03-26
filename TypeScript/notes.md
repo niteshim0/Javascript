@@ -130,6 +130,22 @@ let person: object = {
 };
 ```
 
+**Union:**
+- TypeScript’s type system allows you to build new types out of existing ones using a large variety of operators.
+- A union type is a type formed from two or more other types, representing values that may be any one of those types
+
+```typescript
+function printId(id: number | string) {
+  if (typeof id === "string") {
+    // In this branch, id is of type 'string'
+    console.log(id.toUpperCase());
+  } else {
+    // Here, id is of type 'number'
+    console.log(id);
+  }
+}
+```
+
 **never**
 - The `never` type represents the type of values that never occur.
 - Typically used for functions that never return (e.g., throw errors) or for variables that are never assigned.
