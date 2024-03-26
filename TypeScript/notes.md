@@ -55,39 +55,39 @@ If you're using TypeScript in a project, you may need to create or modify a tsco
 
 ## TypeScript Basic Types and Examples
 
-**Boolean**
+**Boolean:**
 Represents a boolean value, `true` or `false`.
 
 ```typescript
 let isCompleted: boolean = true;
 ```
 
-**Number**
+**Number:**
 Represents numeric values, both integers and floating-point numbers..
 
 ```typescript
 let count: number = 10;
 let price: number = 25.99;
 ```
-**String**
+**String:**
 Represents textual data.
 
 ```typescript
 let message: string = "Hello, TypeScript!";
 ```
-**Array**
+**Array:**
 Represents a collection of elements of the same type.
 ```typescript
 let numbers: number[] = [1, 2, 3, 4, 5];
 let fruits: Array<string> = ["apple", "banana", "orange"];
 ```
-**Tuple**
+**Tuple:**
 Represents an array with a fixed number of elements, each of which may be of a different type.
 
 ```typescript
 let person: [string, number] = ["John", 30];
 ```
-**Enum**
+**Enum:**
 Represents a set of named constants.
 
 ```typescript
@@ -98,13 +98,13 @@ enum Color {
 }
 let selectedColor: Color = Color.Red;
 ```
-**Any**
+**Any:**
 Represents any type, allowing you to bypass type checking.
 
 ```typescript
 let variable: any = "This can be any type";
 ```
-**Void**
+**Void:**
 Represents the absence of any type. Typically used as the return type of functions that do not return a value.
 
 ```typescript
@@ -112,7 +112,7 @@ function sayHello(): void {
     console.log("Hello!");
 }
 ```
-**Null and Undefined**
+**Null and Undefined:**
 Represents the absence of a value.
 
 ```typescript
@@ -120,7 +120,7 @@ let nullValue: null = null;
 let undefinedValue: undefined = undefined;
 ```
 
-**Object**
+**Object:**
 Represents a non-primitive type, typically used to describe instances of classes.
 
 ```typescript
