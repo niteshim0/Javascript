@@ -278,3 +278,103 @@ type GreetFunction = (name: string) => string;
 const greet: GreetFunction = (name) => `Hello, ${name}!`;
 ```
 
+# Objects in TypeScript
+
+In TypeScript, objects are used to represent data structures that contain properties and methods. TypeScript allows you to define object types explicitly, including specifying the types of their properties. 
+
+## Object Declaration
+Objects can be declared using curly braces `{}`. You can define the properties and their types within the braces.
+```typescript
+let person: { name: string, age: number };
+
+person = { name: 'Alice', age: 30 };
+```
+
+## Type Annotations for Object Properties
+You can use type annotations to specify the types of properties within an object.
+```typescript
+let person: { name: string, age: number };
+
+person = { name: 'Alice', age: 30 };
+```
+## Optional Properties
+Properties in objects can be marked as optional using the `?` syntax.
+```typescript
+let person: { name: string, age?: number };
+
+person = { name: 'Alice' };
+```
+
+## ReadOnly Properties
+Properties in objects can be marked as readonly to prevent them from being modified after initialization.
+```typescript
+let person: { readonly name: string };
+
+person = { name: 'Alice' };
+person.name = 'Bob'; // Error: Cannot assign to 'name' because it is a read-only property.
+```
+
+## Nested Objects
+
+Objects can contain other objects as properties.
+
+```typescript
+let person: {
+    name: string,
+    address: {
+        city: string,
+        postalCode: number
+    }
+};
+
+person = {
+    name: 'Alice',
+    address: {
+        city: 'New York',
+        postalCode: 12345
+    }
+};
+```
+## Object Types
+You can define custom types for objects using interfaces or type aliases.
+
+```typescript
+//using interface
+interface Person {
+    name: string;
+    age: number;
+}
+
+let person: Person = { name: 'Alice', age: 30 };
+
+//using type aliases
+type Person = {
+    name: string;
+    age: number;
+};
+
+let person: Person = { name: 'Alice', age: 30 };
+
+```
+
+## Object Methods
+Objects can contain methods, which are functions defined within the object.
+
+```typescript
+let calculator: {
+    add: (x: number, y: number) => number;
+    subtract: (x: number, y: number) => number;
+};
+
+calculator = {
+    add: (x, y) => x + y,
+    subtract: (x, y) => x - y
+};
+
+console.log(calculator.add(5, 3)); // Output: 8
+```
+
+
+
+
+
