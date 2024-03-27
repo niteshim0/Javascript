@@ -186,4 +186,95 @@ if (typeof userInput === "string") {
     userName = userInput; // Type narrowing
 }
 ```
+# Functions in TypeScript
+
+In TypeScript, functions are first-class citizens, meaning they can be treated like any other variable. TypeScript also provides strong typing capabilities, allowing you to define the types of parameters and return values for functions.
+
+**Function Declaration:**
+Functions in TypeScript can be declared using the function keyword followed by the function name and parameters, similar to JavaScript.
+```typescript
+function greet(name: string): string {
+    return `Hello, ${name}!`;
+}
+```
+**Function Expression:**
+Functions can also be defined using function expressions, where you assign a function to a variable.
+```typescript
+const greet = function(name: string): string {
+    return `Hello, ${name}!`;
+};
+```
+
+**Arrow Functions:**
+Arrow functions are a concise way to write functions in TypeScript, especially for anonymous functions or when you want to preserve the lexical scope of `this`.
+```typescript
+const greet = (name: string): string => {
+    return `Hello, ${name}!`;
+};
+```
+**Optional and Default Parameters:**
+You can mark function parameters as optional by adding a `?` after the parameter name or provide default values using the `=` syntax.
+```typescript
+function greet(name: string, greeting: string = 'Hello'): string {
+    return `${greeting}, ${name}!`;
+}
+```
+**Rest Parameters:**
+You can use the rest parameter syntax `...` to represent an indefinite number of arguments as an array.
+```typescript
+function sum(...numbers: number[]): number {
+    return numbers.reduce((acc, val) => acc + val, 0);
+}
+```
+**Function Overloading:**
+TypeScript supports function overloading, where you can provide multiple function signatures for the same function.
+```typescript
+function double(value: number): number;
+function double(value: string): string;
+function double(value: any): any {
+    if (typeof value === 'number') {
+        return value * 2;
+    } else if (typeof value === 'string') {
+        return value.repeat(2);
+    }
+}
+```
+**Callbacks and Higher Order Functions:**
+You can define functions that take other functions as parameters (callbacks) or return functions (higher-order functions).
+```typescript
+function doSomething(callback: (x: number) => void) {
+    callback(42);
+}
+
+function callbackFunction(x: number) {
+    console.log(x);
+}
+
+doSomething(callbackFunction);
+```
+
+**Generics in Functions:**
+You can use generics to create functions that work with a variety of types.
+```typescript
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let output = identity<string>("Hello");
+```
+
+**Type Annotations:**
+You can explicitly specify the types of function parameters and return values using type annotations.
+```typescript
+function add(x: number, y: number): number {
+    return x + y;
+}
+```
+**Type Aliases For Functions:**
+You can create aliases for function types to simplify complex type annotations.
+```typescript
+type GreetFunction = (name: string) => string;
+
+const greet: GreetFunction = (name) => `Hello, ${name}!`;
+```
 
