@@ -82,7 +82,9 @@ let numbers: number[] = [1, 2, 3, 4, 5];
 let fruits: Array<string> = ["apple", "banana", "orange"];
 ```
 **Tuple:**
-Represents an array with a fixed number of elements, each of which may be of a different type.
+- Represents an array with a fixed number of elements, each of which may be of a different type.
+- Doesn't try to mutate Tuples while using them.[Reasons](https://stackoverflow.com/questions/64069552typescript-array-push-method-cant-catch-a-tuple-type-of-the-array)
+
 
 ```typescript
 let person: [string, number] = ["John", 30];
@@ -375,6 +377,92 @@ console.log(calculator.add(5, 3)); // Output: 8
 ```
 
 
+# Difference Between Types and Interfaces in TypeScript
 
+In TypeScript, both types and interfaces are used to define the shape or structure of objects. They provide a way to describe the data contract that an object should adhere to. While they are similar in many respects, there are some key differences between them:
+
+1. **Syntax**:
+    - **Interface**: Interfaces are declared using the `interface` keyword followed by the name of the interface.
+    - **Type**: Types are declared using the `type` keyword followed by the name of the type alias.
+
+    ```typescript
+    // Interface
+    interface Person {
+        name: string;
+        age: number;
+    }
+
+    // Type
+    type Point = {
+        x: number;
+        y: number;
+    };
+    ```
+
+2. **Extensibility**:
+    - **Interface**: Interfaces can be extended using the `extends` keyword to create new interfaces based on existing ones.
+    - **Type**: Types cannot be extended.
+
+    ```typescript
+    interface Animal {
+        species: string;
+    }
+
+    interface Dog extends Animal {
+        breed: string;
+    }
+    ```
+
+3. **Declaration Merging**:
+    - **Interface**: Interfaces support declaration merging, allowing you to define multiple interfaces with the same name and have their members merged together.
+    - **Type**: Types do not support declaration merging.
+
+    ```typescript
+    interface Box {
+        height: number;
+    }
+
+    interface Box {
+        width: number;
+    }
+
+    // Merged interface
+    // interface Box {
+    //     height: number;
+    //     width: number;
+    // }
+    ```
+
+4. **Ability to Represent Primitives**:
+    - **Interface**: Interfaces cannot represent primitive types directly.
+    - **Type**: Types can represent primitive types directly.
+
+    ```typescript
+    type Age = number; // valid
+    interface AgeInterface = number; // Error: An interface can only extend an object type, but 'number' extends from 'number'.
+    ```
+
+5. **Readability**:
+    - **Interface**: Interfaces are often preferred when defining object shapes that primarily serve as contracts for other parts of the codebase, as they provide clear documentation of the expected structure.
+    - **Type**: Types are more versatile and can represent complex types and unions more succinctly, making them suitable for various scenarios, such as union types, tuple types, etc.
+
+6. **Intersection and Union**:
+    - **Interface**: Interfaces can be used in intersection types and union types.
+    - **Type**: Types can be used in intersection types and union types as well.
+
+    ```typescript
+    interface A {
+        foo: number;
+    }
+
+    interface B {
+        bar: string;
+    }
+
+    type AB = A & B; // Intersection
+    type ABUnion = A | B; // Union
+    ```
+
+In general, when deciding between using interfaces and types, it often comes down to personal preference and the specific requirements of your codebase. Use interfaces when defining object shapes that represent clear contracts, and use types for more complex type manipulations and definitions.
 
 

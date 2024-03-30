@@ -4,7 +4,7 @@ const User = {
 };
 console.log(User);
 
-function createUser({name:string, age:number}) {
+function createUser({}) {
     
 }
 let newUser = {name: 'John', age: 30,email:"aalu@gobhi.com"}
@@ -37,8 +37,40 @@ let newUser3 = {name: 'John', age: 30, email: "aalu@gobhi.com"};
 createUser3(newUser3); // Error: Object literal may only specify known properties
 
 
-function createCourse({name:string, price:number}) {
-    return {name:"typescript",price:100}
-}
+
 
 createUser({name: 'John', age: 30})
+
+//readonly and optional properties
+type User2 = {
+  readonly _id : string,
+  name: string,
+  email : string,
+  isActive : boolean,
+  cardDetails? : string
+}
+
+let user: User2 = {
+  _id: "123",
+  name: "John",
+  email: "alu@alu.com",
+  isActive: true,
+}
+
+// user._id = "456" // Error: Cannot assign to '_id' because it is a read-only property.
+user.cardDetails = "1234 5678 901 2345" // OK because cardDetails is an optional property
+console.log(user)
+
+//mixing up the types
+
+type CardNumber = {
+  cardNumber: string,
+}
+
+type CardHolder = {
+  cardHolder: string,
+}
+
+type cardDetails = CardNumber & CardHolder & {cvv: number}
+
+// union types
