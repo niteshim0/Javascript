@@ -614,6 +614,69 @@ console.log(obj.myProperty); // Output: 10 (value remains unchanged)
 
 ```
 
+# Abstract Classes 
+
+An Abstract Class is a class that cannot be directly instantiated. It is meant to be used as a base class for other classes, providing common functionality that subclasses can inherit and override as needed. Abstract classes can contain abstract methods, which are methods declared without an implementation. Subclasses of an abstract class must provide implementations for all abstract methods declared in the base abstract class.
+
+Abstract classes are useful for defining common behavior and contracts that subclasses must adhere to while allowing subclasses to provide specific implementations for abstract methods and properties. They promote code reusability and help enforce design contracts in object-oriented TypeScript codebases.
+
+
+## Declaring an Abstract Class :
+
+use the `abstract` keyword before the `class` keyword. Abstract classes may contain regular methods with implementations, as well as abstract methods without implementations.
+
+```ts
+abstract class Animal {
+    abstract makeSound(): void; // Abstract method
+    move(): void { // Regular method
+        console.log("Moving...");
+    }
+}
+```
+
+## Extending an Abstract Class :
+
+Subclasses of an abstract class can be created by using the `extends` keyword. Subclasses must provide implementations for all abstract methods declared in the abstract base class.
+
+```ts
+class Dog extends Animal {
+    makeSound(): void {
+        console.log("Woof! Woof!");
+    }
+}
+
+class Cat extends Animal {
+    makeSound(): void {
+        console.log("Meow!");
+    }
+}
+```
+
+## Using Abstract Classes : 
+
+You cannot create an instance of an abstract class directly. You can only create instances of its subclasses.
+
+```ts
+let dog = new Dog();
+dog.makeSound(); // Output: Woof! Woof!
+dog.move(); // Output: Moving...
+
+let cat = new Cat();
+cat.makeSound(); // Output: Meow!
+cat.move(); // Output: Moving...
+```
+## Abstract Properties :
+
+Abstract classes can also have abstract properties, which are properties declared without an initial value. Subclasses must provide implementations for all abstract properties declared in the base abstract class.
+
+```ts
+abstract class Animal {
+    abstract name: string; // Abstract property
+}
+```
+
+
+
 
 
 
