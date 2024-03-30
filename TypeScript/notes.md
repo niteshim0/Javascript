@@ -465,4 +465,155 @@ In TypeScript, both types and interfaces are used to define the shape or structu
 
 In general, when deciding between using interfaces and types, it often comes down to personal preference and the specific requirements of your codebase. Use interfaces when defining object shapes that represent clear contracts, and use types for more complex type manipulations and definitions.
 
+# Classes in TypeScript
+
+In TypeScript, classes provide a way to define blueprints for creating objects with similar properties and methods. They are a fundamental feature of object-oriented programming (OOP).
+
+## Declaring a Class:
+
+To declare a class in TypeScript, you use the `class` keyword followed by the class name. You can also specify properties and methods inside the class definition.
+
+```typescript
+class MyClass {
+    // Properties
+    property1: string;
+    property2: number;
+
+    // Constructor
+    constructor(p1: string, p2: number) {
+        this.property1 = p1;
+        this.property2 = p2;
+    }
+
+    // Methods
+    myMethod() {
+        console.log(`Property 1: ${this.property1}, Property 2: ${this.property2}`);
+    }
+}
+```
+## Creating Objects:
+
+Once you have defined a class, you can create objects (instances) of that class using the `new` keyword followed by the class name and constructor arguments.
+
+```ts
+let obj1 = new MyClass("Hello", 42);
+obj1.myMethod(); // Output: Property 1: Hello, Property 2: 42
+```
+
+## Constructors:
+
+Classes can have a special method called the constructor, which is invoked automatically when an object of the class is created using the `new` keyword. Constructors are used to initialize object properties.
+
+## Inheritance:
+
+Classes in TypeScript support inheritance, allowing you to create subclasses (child classes) that inherit properties and methods from a parent class (superclass).
+
+```ts
+class ChildClass extends ParentClass {
+    // Additional properties and methods
+}
+```
+
+## Static Members: 
+
+You can define static properties and methods in a class using the `static` keyword. Static members belong to the class itself rather than to instances of the class.
+
+```ts
+class MyClass {
+    static myStaticProperty: number = 10;
+
+    static myStaticMethod() {
+        console.log("This is a static method.");
+    }
+}
+
+console.log(MyClass.myStaticProperty); // Output: 10
+MyClass.myStaticMethod(); // Output: This is a static method.
+```
+
+
+## Access Modifiers:
+
+Access modifiers in TypeScript are keywords that control the visibility and accessibility of class members (properties and methods). TypeScript supports three main access modifiers: `public`, `private`, and `protected`.
+
+**1.Public**: Members marked as public are accessible from outside the class. They can be accessed by any code that can see the instance of the class.
+
+**2.Private**: Members marked as private are not accessible from outside the class. They can only be accessed within the same class where they are declared. Instances of the class cannot access private members, and attempts to access them from outside the class will result in a compilation error.
+
+**3.Protected**: Members marked as protected are similar to private members, but they are accessible within the class as well as within its subclasses (derived classes). They cannot be accessed from outside the class or its subclasses.
+
+```ts
+class Car {
+  public brand: string;     // Public property
+  private model: string;    // Private property
+  protected year: number;   // Protected property
+
+  constructor(brand: string, model: string, year: number) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  displayInfo() {
+    console.log(`Brand: ${this.brand}, Model: ${this.model}, Year: ${this.year}`);
+  }
+}
+
+class ElectricCar extends Car {
+  constructor(brand: string, model: string, year: number) {
+    super(brand, model, year);
+    // We can access the protected member 'year' from the base class here
+    console.log(`Electric car year: ${this.year}`);
+  }
+}
+
+let myCar = new Car('Toyota', 'Camry', 2022);
+console.log(myCar.brand);    // Accessing public property 'brand'
+// console.log(myCar.model); // This will result in a compilation error since 'model' is private
+
+let electricCar = new ElectricCar('Tesla', 'Model S', 2023);
+// console.log(electricCar.year); // This will result in a compilation error since 'year' is protected
+
+```
+
+## Getters and Setters :
+
+Getters and Setters are special methods used to control the access to properties of an object. They allow you to execute custom code when getting or setting the value of a property. 
+
+### Getter
+
+A getter method is used to retrieve the value of a property. It is defined using the `get` keyword followed by the property name.
+
+### Setter
+
+A setter method is used to set the value of a property. It is defined using the `set` keyword followed by the property name. Setters take a parameter representing the new value to be assigned to the property. Setters doesn't have return type even void in typescript.
+
+```ts
+class MyClass {
+    private _myProperty: number = 0;
+
+    get myProperty(): number {
+        return this._myProperty;
+    }
+
+    set myProperty(value: number) {
+        if (value >= 0) {
+            this._myProperty = value;
+        } else {
+            console.log("Value must be non-negative.");
+        }
+    }
+}
+
+let obj = new MyClass();
+obj.myProperty = 10;
+console.log(obj.myProperty); // Output: 10
+
+obj.myProperty = -5; // Output: Value must be non-negative.
+console.log(obj.myProperty); // Output: 10 (value remains unchanged)
+
+```
+
+
+
 
