@@ -838,6 +838,189 @@ console.log(getLength([1, 2, 3]));
 console.log(getLength({ length: 5 }));
 ```
 
+# Narrowing in TypeScript
+
+
+Narrowing in TypeScript refers to the process of refining the type of a variable within a certain code block or context based on specific conditions. It allows TypeScript to narrow down the possible types of a variable, providing more precise type information to the compiler and enabling better type inference.
+
+## Type Guards
+
+Type guards are expressions that perform runtime checks on variables to determine their type. When a type guard evaluates to true, TypeScript narrows down the type of the variable within the corresponding code block.
+
+```ts
+function isString(value: any): value is string {
+    return typeof value === 'string';
+}
+
+let value: any = "hello";
+
+if (isString(value)) {
+    // Within this block, 'value' is narrowed down to type 'string'
+    console.log(value.toUpperCase());
+}
+```
+
+## InstanceOf
+
+The `instanceof` operator checks if an object is an instance of a particular class. It can be used as a type guard to narrow down the type of an object within a conditional block.
+
+```ts
+class MyClass {
+  constructor(public topic: string, public proglang: string) {}
+
+  methodDefinedInMyClass() {
+      console.log(`Topic: ${this.topic}, Programming Language: ${this.proglang}`)
+  }
+}
+
+let obj: any = new MyClass("narrowing", "typescript");
+
+if (obj instanceof MyClass) {
+  // Within this block, 'obj' is narrowed down to type 'MyClass'
+  obj.methodDefinedInMyClass();
+}
+```
+
+## Type Predicates
+
+Type predicates are user-defined functions that return a boolean value, indicating whether a variable is of a specific type. TypeScript understands these functions as type guards.
+
+```ts
+function isNumber(value: any): value is number {
+    return typeof value === 'number';
+}
+
+let num: any = 42;
+
+if (isNumber(num)) {
+    // Within this block, 'num' is narrowed down to type 'number'
+    console.log(num.toFixed(2));
+}
+
+type Fish = {swim:()=>void};
+type Bird = {fly:()=>void};
+
+
+
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+
+function move(pet: Fish | Bird) {
+  if (isFish(pet)) {
+      return pet.swim();
+  }
+  return pet.fly();
+}
+
+move({swim:()=>console.log('swim')});
+move({fly:()=>console.log('fly')});
+```
+
+## Inference Based On Control Flow
+
+TypeScript analyzes the control flow of your code to narrow down types. For example, after a check for null or undefined, TypeScript assumes that the variable is no longer of those types.
+
+```ts
+let maybeNumber: number | null = Math.random() > 0.5 ? 42 : null;
+
+if (maybeNumber !== null) {
+    // Within this block, 'maybeNumber' is narrowed down to type 'number'
+    console.log(maybeNumber.toFixed(2));
+}
+```
+
+## Discriminated Union
+
+Discriminated unions in TypeScript are a way of combining multiple types into a single type, where each variant of the type is identified by a discriminant property. This discriminant property acts as a tag that TypeScript uses to narrow down the possible types when working with values of that type. Discriminated unions are particularly useful for modeling scenarios where a value can be one of several distinct types.
+
+```ts
+// Discriminated Union
+interface Circle {
+  kind: "circle"; // Discriminant property
+  radius: number;
+}
+
+interface Square {
+  kind: "square"; // Discriminant property
+  sideLength: number;
+}
+
+interface Triangle {
+  kind: "triangle"; // Discriminant property
+  sideA: number;
+  sideB: number;
+  sideC: number;
+}
+
+type Shape = Circle | Square | Triangle;
+
+// Function to calculate area based on the shape
+function calculateArea(shape: Shape): number {
+  switch (shape.kind) {
+      case "circle":
+          return Math.PI * shape.radius ** 2;
+      case "square":
+          return shape.sideLength ** 2;
+      case "triangle":
+          // Heron's formula to calculate area of a triangle
+          const s = (shape.sideA + shape.sideB + shape.sideC) / 2;
+          return Math.sqrt(s * (s - shape.sideA) * (s - shape.sideB) * (s - shape.sideC));
+      default:
+          // TypeScript knows that we have handled all possible shapes
+          const _exhaustiveCheck: never = shape;
+          return _exhaustiveCheck;
+  }
+}
+
+const circle: Circle = { kind: "circle", radius: 5 };
+console.log(calculateArea(circle));
+
+const square: Square = { kind: "square", sideLength: 4 };
+console.log(calculateArea(square));
+
+const triangle: Triangle = { kind: "triangle", sideA: 3, sideB: 4, sideC: 5 };
+console.log(calculateArea(triangle));
+```
+## Exhaustive Checks with Never
+
+Exhaustiveness checking with never is a technique used in TypeScript to ensure that all possible cases of a discriminated union have been handled in a switch statement or conditional block. By using never, TypeScript can infer when a certain case should never occur based on the types involved, helping catch potential bugs or omissions in code.
+
+```ts
+// Define a discriminated union
+type Shape = "circle" | "square" | "triangle";
+
+// Function to handle shapes
+function handleShape(shape: Shape) {
+    switch (shape) {
+        case "circle":
+            console.log("Handling circle");
+            break;
+        case "square":
+            console.log("Handling square");
+            break;
+        case "triangle":
+            console.log("Handling triangle");
+            break;
+        default:
+            // TypeScript infers that this case is unreachable
+            const _exhaustiveCheck: never = shape;
+            console.log(`Unexpected shape: ${_exhaustiveCheck}`);
+    }
+}
+
+// Example usage
+handleShape("circle");
+handleShape("square");
+handleShape("triangle");
+handleShape("hexagon"); // TypeScript error: Argument of type '"hexagon"' is not assignable to parameter of type 'Shape'
+
+```
+
+
+**-----------------------------TypeScript : The End------------------------------**
+
+
 
 
 
