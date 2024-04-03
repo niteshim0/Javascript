@@ -674,7 +674,169 @@ abstract class Animal {
     abstract name: string; // Abstract property
 }
 ```
+# Generics in TypeScript
 
+Generics in TypeScript are a way to create reusable components, functions, and classes that work with a variety of data types while maintaining type safety. They allow you to define placeholders for types that are specified when the code is used, rather than when it's written.
+
+## Type Parameter
+
+Generics are declared using a type parameter enclosed in angle brackets (`<` and `>`). This parameter represents a type that will be specified when the generic code is used. For example:
+
+```ts
+function identity<T>(arg: T): T {
+    return arg;
+}
+```
+Here, `T` is a type parameter representing any type that will be passed to the `identity` function.
+
+## Type Safety
+
+Generics ensure type safety by allowing TypeScript to infer and enforce the types used with generic components. This helps catch type-related errors at compile-time rather than runtime.
+
+## Reusability
+
+Generics promote code reuse by allowing you to create components that can work with multiple types. This reduces duplication and increases maintainability.
+
+## Generic Functions
+Functions that accept generic types, allowing them to operate on a wide range of data types. For example:
+
+```ts
+function idenityOne(val : number | boolean): number | boolean{
+  return val;
+}
+
+function idenityTwo(val : any):any{
+  return val;
+}
+
+function idenityThree<T>(val : T):T{
+  return val;
+}
+
+console.log(score);
+console.log(names);
+console.log(idenityOne(5));
+console.log(idenityTwo("Hello"));
+console.log(idenityThree(5));
+console.log(idenityThree("Hello"));
+
+// There is big difference b/w any and generics , genrics logs the types of the values passed to it while any does not log the type of the value passed to it.
+
+// Passing user defined types to generics
+interface User {
+  readonly dbId : number;
+  name : string;
+  email : string;
+  userId : number;
+  googleLogin? : number;
+  startTrial() : string; // both ways works fine whatever you prefer
+  getCoupon : (couponame : string,value : number) => string;
+}
+
+const user : User = {
+  dbId : 1,
+  name : 'Steve',
+  email : 'example@gmail.com',
+  userId : 1,
+  googleLogin : 1,
+  startTrial() {
+    return 'trial started';
+  },
+  getCoupon(couponame : string, value : number) {
+    return `coupon ${couponame} applied with value ${value}`;
+  }
+};
+
+console.log(idenityThree<User>(user)); // in user defined types we have to specifically need to mention what type of value we are passing to the generic function.
+function getSearchProducts<T>(products : T[]):T{
+  const validIdx = Math.floor(Math.random() * products.length);
+  return products[validIdx];
+}
+
+const products = [
+  {
+    name : "laptop",
+    price : 1000
+  },
+  {
+    name : "mobile",
+    price : 500
+  },
+  {
+    name : "tablet",
+    price : 300
+  }
+];
+
+console.log(getSearchProducts(products));
+
+// using arrow function to do the same
+
+const getSearchProductsArrow = <T>(products : T[]):T => {
+  const validIdx = Math.floor(Math.random() * products.length);
+  return products[validIdx];
+}
+
+console.log(getSearchProductsArrow(products));
+
+// Generics with multiple types
+function getFirstTwo<T, U>(arr1: T[], arr2: U[]): [T, U] {
+  return [arr1[0], arr2[0]];
+}
+
+const arr1 = [10, 20, 30];
+const arr2 = ["A", "B", "C"];
+const result = getFirstTwo(arr1, arr2);
+console.log(result);
+```
+
+## Generic Classes
+
+Generic classes in TypeScript allow you to create classes that can work with multiple data types while maintaining type safety. They are similar to generic functions but applied to classes.
+
+```ts
+class Box<T> {
+  private value: T;
+
+  constructor(value: T) {
+      this.value = value;
+  }
+
+  getValue(): T {
+      return this.value;
+  }
+
+  setValue(newValue: T): void {
+      this.value = newValue;
+  }
+}
+
+const box = new Box<string>("Hello");
+console.log(box.getValue());
+const box2 = new Box<number>(100);
+console.log(box2.getValue());
+
+const box3 = new Box<User>(user);
+console.log(box3.getValue());
+
+```
+## Constraints
+
+One can also apply constraints to the type parameter in a generic class, ensuring that the type must satisfy certain conditions. This is done using the `extends `keyword. For example:
+
+```ts
+interface Lengthwise {
+  length: number;
+}
+
+function getLength<T extends Lengthwise>(arg: T): number {
+  return arg.length;
+}
+
+console.log(getLength("Hello"));
+console.log(getLength([1, 2, 3]));
+console.log(getLength({ length: 5 }));
+```
 
 
 
