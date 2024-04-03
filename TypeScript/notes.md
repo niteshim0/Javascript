@@ -8,7 +8,7 @@
 
 - TypeScript is a popular choice for developing large and complex JavaScript applications. It can also be used for smaller projects, and can be a good way to learn about static typing.
 
-- TypeScript is not some standalone language or superset of Javascript(true in some ways) it is the lnaguage which is wrapper around Javascript. It will be accurate to call it development tool rather than superset of Javascript which helps us in writing error-free ,maintanable,scalable and readable code.
+- TypeScript is not some standalone language or superset of Javascript(true in some ways) it is the language which is wrapper around Javascript. It will be accurate to call it development tool rather than superset of Javascript which helps us in writing error-free ,maintanable,scalable and readable code.
 
 **Benefits of using TypeScript**
 
