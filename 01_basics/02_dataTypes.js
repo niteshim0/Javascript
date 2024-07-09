@@ -34,7 +34,7 @@ console.log(typeof null); //object
 
 5.Null:  standalone value it is represenataion of empty value it is special type and it is a object type. Example: let y = null; 
 
-6.Symbol (ES6): it is mostly used used to find uniqnece.
+6.Symbol (ES6): it is mostly used used to find uniqness.
 
 7.BigInt (ES11): Represents large integers that cannot be represented by the Number type.
 
