@@ -64,7 +64,7 @@ console.log(addOne(6))
 function addOne(num){
   return num + 1;
 }
-// - Function declarations are hoisted, meaning they are processed before any code execution.
+// - Function declarations are hoisted, meaning they are processed before any code execution.(because of memory creation phase that happens before the execution phase in js).
 // - They are available in the entire scope in which they are declared, regardless of where they appear within that scope.
 // - Can be used before they are declared in the code.
 
