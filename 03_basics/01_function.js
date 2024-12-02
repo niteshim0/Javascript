@@ -74,11 +74,11 @@ function objectHandler(anyobject){
 
 console.log(objectHandler(prouct));
 
-function arrayHanlder(anyarray){
+function arrayHandler(anyarray){
   console.log(`First value of array is ${anyarray[0]}  and second value is ${anyarray[1]}`);
 }
 
-console.log(arrayHanlder([100,200,300,400,500]));
+console.log(arrayHandler([100,200,300,400,500]));
 
 
 
