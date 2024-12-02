@@ -1,4 +1,4 @@
-const name = `Niteshe`;//first way of declaring string;
+const name = `Nitesh`;//first way of declaring string;
 console.log(name);
  //second way
  //String interpolation
